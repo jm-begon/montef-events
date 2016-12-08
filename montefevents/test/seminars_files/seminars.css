@@ -1,0 +1,61 @@
+.homeagenda-details {width:inherit;font-size: 13px;letter-spacing: .05em;padding-left: 21px; vertical-align: middle} 
+.homeagenda-details .wiki {font-size: 12px;letter-spacing: initial;padding:15px 0} 
+.homenews.avenir {margin-bottom:20px; position: relative;padding:0;border-radius: 10px 0 0 0; background-color: #f1F1F1; border-color: #e2e2e2}
+.homenews a {color:#1a5257}
+.homeagenda-date {width:70px;border-right: 1px solid #e1e1e1;padding: 15px 0}
+.homeagenda-date .mois {font-size: 18px;margin-bottom: 7px}
+.homeagenda-date .jour {font-size: 20px}
+.homeagenda-details > div {margin-bottom: 8px}
+.location {position: absolute; right:5px; bottom: 4px;}
+.seminar-thumb {display:table-cell; min-width:130px}
+.othertype {
+   background-color: rgba(35, 113, 120, 0.8);
+   color: #fff;
+   padding: 0px 0px;
+   font-size: 9px;
+   font-weight: 400;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 70px;
+   text-align: center;
+}
+.seminar-slides a {color:black !important}
+.seminar-floatpict {float:right; margin: 0 0 10px 10px}
+#lefttext h2 {color: #cecece}
+
+@media (max-width: 559px) {
+   .seminarleft {display:none}
+}
+
+@media (min-width: 560px) { 
+}
+
+@media (max-width: 767px) {
+   .seminar-thumb {display:none}
+   .othertype {left:auto; right: 0}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+   .homenews img {max-width: none}
+   .homeagenda-details.resize {width:370px}
+   .seminar-thumb {width: 100px; min-width: initial; max-width: 120px; vertical-align: middle}
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+   .homeagenda-details.resize {width:548px}
+}
+
+@media (min-width: 1200px) {
+   .homeagenda-details.resize {width:548px}
+}
+
+#mainContent .left hr {
+   margin-bottom: 8px;
+   border-top: 1px solid #909090;
+}
+
+#lefttext {text-align: center}
