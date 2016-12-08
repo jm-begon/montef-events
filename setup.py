@@ -43,6 +43,6 @@ if __name__ == '__main__':
           license='BSD3',
           classifiers=CLASSIFIERS,
           platforms='any',
-          install_requires=[],
+          install_requires=["bs4"],
           packages=['montefevents', 'montefevents.test'],
           scripts=['bin/montefevents'])
