@@ -5,10 +5,10 @@
 
 from distutils.core import setup
 
-import clustertools
+import montefevents
 
 NAME = 'montefevents'
-VERSION = clustertools.__version__
+VERSION = montefevents.__version__
 AUTHOR = "Jean-Michel Begon"
 AUTHOR_EMAIL = "jm.begon@gmail.com"
 URL = 'https://github.com/jm-begon/montef-events'
