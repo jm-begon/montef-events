@@ -95,10 +95,10 @@ Contact: {contact}
 
     def preview(self, event, decision):
         subject, content = self.get_raw(event, decision)
-        print subject
-        print ""
-        print content
-        print ""
-        print ""
+        print(subject)
+        print("")
+        print(content)
+        print("")
+        print("")
 
 
