@@ -34,7 +34,7 @@ __SEMINAR_SUFFIX__ = "/seminars"
 class JSONParser(object):
 
     def _parse_date(self, date_as_text):
-        return datetime.strptime(date_as_text, "%B %d, %Y (%A)")
+        return datetime.strptime(date_as_text, "%B %d, %Y (%A) %H:%M")
 
     def _remove_duplicate_eol(self, abstract):
         tmp = re.sub("( *(\r\n)+ *)+", "\r\n", abstract)
