@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-#!/usr/bin/env python
-
-
-from distutils.core import setup
+from setuptools import setup
 
 import montefevents
 
@@ -16,7 +13,7 @@ DESCRIPTION = "Toolkit to provide automatic (email) notification of the Montefio
 with open('README.md') as f:
     LONG_DESCRIPTION = f.read()
 CLASSIFIERS = [
-    'Development Status :: 2 - Pre-Alpha',
+    'Development Status :: 4 - Beta',
     'Environment :: Console',
     'Intended Audience :: Developers',
     'Intended Audience :: Science/Research',
@@ -24,15 +21,11 @@ CLASSIFIERS = [
     'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
     'Programming Language :: Python :: 2.7',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.3',
-    'Programming Language :: Python :: 3.4',
+    'Programming Language :: Python :: 3.5',
     'Topic :: Utilities',
 ]
 
 if __name__ == '__main__':
-    from clustertools.config import dump_config
-    dump_config()
     setup(name=NAME,
           version=VERSION,
           author=AUTHOR,
@@ -43,6 +36,10 @@ if __name__ == '__main__':
           license='BSD3',
           classifiers=CLASSIFIERS,
           platforms='any',
+          keywords='utility email notification',
           install_requires=["bs4"],
           packages=['montefevents', 'montefevents.test'],
-          scripts=['bin/montefevents'])
+          scripts=['bin/montefevents'],
+          package_data={
+            'test':['*.html']
+          })

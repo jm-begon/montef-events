@@ -69,8 +69,8 @@ def test_today():
 
 
 def test_day_after():
-    ref_dates = [datetime(2016, 12, 05, 04, 10, 00),  # Monday
-                 datetime(2016, 12, 06, 04, 10, 00)]  # Tuesday
+    ref_dates = [datetime(2016, 12, 5, 4, 10, 00),  # Monday
+                 datetime(2016, 12, 6, 4, 10, 00)]  # Tuesday
     expectations = [Decision.ANNOUNCE, Decision.IGNORE]
     for ref_date, expectation in zip(ref_dates, expectations):
         policy = Policy(ref_date)
@@ -84,8 +84,8 @@ def test_day_after():
 
 
 def test_day_after_day_after():
-    ref_dates = [datetime(2016, 12, 05, 04, 10, 00),  # Monday
-                 datetime(2016, 12, 06, 04, 10, 00)]  # Tuesday
+    ref_dates = [datetime(2016, 12, 5, 4, 10, 00),  # Monday
+                 datetime(2016, 12, 6, 4, 10, 00)]  # Tuesday
     expectations = [Decision.ANNOUNCE, Decision.IGNORE]
     for ref_date, expectation in zip(ref_dates, expectations):
         policy = Policy(ref_date)

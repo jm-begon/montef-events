@@ -53,7 +53,7 @@ def test_json_parsing():
             assert_equal(seminar.name, name)
         assert_true(True)
     except Exception as ex:
-        assert_true(False, "Got %s: %s"%(ex.__class__.__name__, ex.message))
+        assert_true(False, "Got {}".format(repr(ex)))
 
 
 def test_montef_link_list():

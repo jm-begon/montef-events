@@ -14,7 +14,7 @@ from montefevents import Seminar, Decision, SMTPRenderer
 
 def _basic_seminar():
     return Seminar("test seminar", "test speaker",
-                   datetime(2016, 12, 06, 15, 10, 00),
+                   datetime(2016, 12, 6, 15, 10, 00),
                    "test location", "test contact", "test abstract")
 
 

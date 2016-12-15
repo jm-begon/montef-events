@@ -19,7 +19,12 @@ from bs4 import BeautifulSoup
 import json
 from abc import ABCMeta, abstractmethod
 import re
-from HTMLParser import HTMLParser
+try:
+    # Python 2
+    from HTMLParser import HTMLParser
+except ImportError:
+    # Python 3
+    from html.parser import HTMLParser
 
 from .event import Seminar
 from .log import get_warn_log
@@ -45,7 +50,7 @@ class JSONParser(object):
 
     def _html2str(self, dictionary):
         parser = HTMLParser()
-        return {k:parser.unescape(v) for k,v in dictionary.iteritems()}
+        return {k:parser.unescape(v) for k,v in dictionary.items()}
 
 
     def __call__(self, jdict):
@@ -101,10 +106,11 @@ class MontefioreGetter(DataSource):
     def _get_json(self, link):
         try:
             return json.loads(urlopen(self.base_url+link+"?json").read())
-        except Exception, reason:
+        except Exception as e:
             if self.fail_fast:
                 raise
-            errcls = Exception.__class__.__name__
+            errcls = e.__class__.__name__
+            reason = e.message
             get_warn_log().warn("Could not load json at {link}. "
                 "The reason is: {reason} ({errcls})".format(link=link,
                                                             reason=reason,

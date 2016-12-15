@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 
 __author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
 
@@ -137,12 +137,12 @@ class SMTPChannel(Channel):
         return conn
 
     def preview(self, event, decision):
-        print "> FROM: ", self.from_addr
-        print "> TO:", ", ".join(self.to_addrs)
-        print "> BY:", self.smtp_serv,":", self.port
+        print("> FROM: ", self.from_addr)
+        print("> TO:", ", ".join(self.to_addrs))
+        print("> BY:", self.smtp_serv,":", self.port)
         if self.password is not None:
-            print "> AUTH:", self.username
-        print "> CONTENT"
+            print("> AUTH:", self.username)
+        print("> CONTENT")
         self.renderer.preview(event, decision)
 
 
@@ -178,12 +178,8 @@ class Sender(object):
             except Exception as ex:
                 if self.fail_fast:
                     raise
-                errcls = ex.__class__.__name__
-                warn_log.error("Could not send event {event}. "
-                  "The reason is: {reason} ({errcls})".format(event=event,
-                                                              reason=ex.message,
-                                                              errcls=errcls))
-
+                warn_log.error("Could not send event {event}: "
+                  "got exception {error}".format(event=event, error=repr(ex)))
 
 
 

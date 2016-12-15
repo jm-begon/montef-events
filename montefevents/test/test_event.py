@@ -14,12 +14,12 @@ from montefevents import Seminar
 
 def _basic_seminar():
     return Seminar("test seminar", "test speaker",
-                   datetime(2016, 12, 06, 15, 10, 00),
+                   datetime(2016, 12, 6, 15, 10, 00),
                    "test location", "test contact", "test abstract")
 
 def _tba_seminar():
     return Seminar("TBA", "test speaker",
-                   datetime(2016, 12, 06, 15, 10, 00),
+                   datetime(2016, 12, 6, 15, 10, 00),
                    "test location", "test contact", "test abstract")
 
 
@@ -40,10 +40,10 @@ def test_str():
 
 def test_dates():
     seminar = _basic_seminar()
-    delta0 = datetime(2016, 12, 06, 10, 20, 00)
+    delta0 = datetime(2016, 12, 6, 10, 20, 00)
     delta7 = datetime(2016, 12, 13, 15, 20, 00)
     delta20 = datetime(2016, 12, 26, 15, 20, 00)
-    delta_1 = datetime(2016, 12, 05, 15, 20, 00)
+    delta_1 = datetime(2016, 12, 5, 15, 20, 00)
     assert_equal(seminar.how_many_days_before(delta0), 0)
     assert_equal(seminar.how_many_days_before(delta7), -7)
     assert_equal(seminar.how_many_days_before(delta20), -20)

@@ -49,7 +49,7 @@ to stdout.
 
 
 __author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
-__version__ = 'dev'
+__version__ = '0.1.0'
 
 
 

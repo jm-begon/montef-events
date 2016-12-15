@@ -57,7 +57,7 @@ def test_sender():
         sender(PseudoDataSource())
         assert_true(True)
     except Exception as ex:
-        assert_true(False, "Got exception '%s': %s" % (ex.__class__.__name__, ex.message))
+        assert_true(False, "Got exception {}".format(repr(ex)))
 
 def test_debug():
     sender = Sender(Policy(_monday12()), NOPChannel(True), debug=True)
@@ -70,7 +70,7 @@ def test_fail_fast_false():
         sender(PseudoDataSource())
         assert_true(True)
     except Exception as ex:
-        assert_true(False, "Got exception '%s': %s" % (ex.__class__.__name__, ex.message))
+        assert_true(False, "Got exception {}".format(repr(ex)))
     assert_greater(bc.err_count, 1)
 
 def test_fail_fast_true():

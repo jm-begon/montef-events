@@ -5,8 +5,7 @@ from __future__ import unicode_literals
 __author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
 
 
-from abc import ABCMeta, abstractmethod
-from datetime import datetime
+from abc import ABCMeta
 
 
 
@@ -27,7 +26,7 @@ class Event(object):
         return (self.date.date() - date.date()).days
 
     def date_as_str(self):
-        return unicode(self.date.strftime("%A, %B %d, %H:%M"))
+        return self.date.strftime("%A, %B %d, %H:%M")
 
     def is_filled(self):
         return self.name.strip().lower() != "tba"
