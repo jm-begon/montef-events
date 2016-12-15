@@ -109,12 +109,9 @@ class MontefioreGetter(DataSource):
         except Exception as e:
             if self.fail_fast:
                 raise
-            errcls = e.__class__.__name__
-            reason = e.message
             get_warn_log().warn("Could not load json at {link}. "
-                "The reason is: {reason} ({errcls})".format(link=link,
-                                                            reason=reason,
-                                                            errcls=errcls))
+                "Got Exception {error})".format(link=link,
+                                                error=repr(e))
             return None
 
     def _parse(self, jdict):
@@ -125,9 +122,8 @@ class MontefioreGetter(DataSource):
                 raise
             errcls = ex.__class__.__name__
             get_warn_log().warn("Could not parse event {jdict}. "
-                "The reason is: {reason} ({errcls})".format(jdict=unicode(jdict),
-                                                            reason=ex.message,
-                                                            errcls=errcls))
+                "Got Exception {error})".format(jdict=str(jdict),
+                                                error=repr(e))
             return None
 
 
