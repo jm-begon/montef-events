@@ -111,7 +111,7 @@ class MontefioreGetter(DataSource):
                 raise
             get_warn_log().warn("Could not load json at {link}. "
                 "Got Exception {error})".format(link=link,
-                                                error=repr(e))
+                                                error=repr(e)))
             return None
 
     def _parse(self, jdict):
@@ -123,7 +123,7 @@ class MontefioreGetter(DataSource):
             errcls = ex.__class__.__name__
             get_warn_log().warn("Could not parse event {jdict}. "
                 "Got Exception {error})".format(jdict=str(jdict),
-                                                error=repr(e))
+                                                error=repr(e)))
             return None
 
 
