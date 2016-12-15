@@ -26,6 +26,9 @@ except ImportError:
     # Python 3
     from html.parser import HTMLParser
 
+import codecs
+
+
 from .event import Seminar
 from .log import get_warn_log
 
@@ -93,6 +96,7 @@ class MontefioreGetter(DataSource):
         self.seminar_suffix = seminar_suffix
         self.parser = parser
         self.fail_fast = fail_fast
+        self.reader = codecs.getreader("utf-8")
 
 
     def _get_link_list(self, page):
@@ -105,7 +109,8 @@ class MontefioreGetter(DataSource):
 
     def _get_json(self, link):
         try:
-            return json.loads(urlopen(self.base_url+link+"?json").read())
+            response = urlopen(self.base_url+link+"?json")
+            return json.load(self.reader(response))
         except Exception as e:
             if self.fail_fast:
                 raise
