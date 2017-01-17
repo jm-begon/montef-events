@@ -109,7 +109,8 @@ class MontefioreGetter(DataSource):
 
     def _get_json(self, link):
         try:
-            response = urlopen(self.base_url+link+"?json")
+            url = self.base_url+link+"?json"
+            response = urlopen(url)
             return json.load(self.reader(response))
         except Exception as e:
             if self.fail_fast:

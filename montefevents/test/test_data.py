@@ -5,9 +5,17 @@ __author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
 
 
 from nose.tools import assert_equal, assert_true
+from nose.plugins.skip import Skip, SkipTest
 
 from datetime import datetime
 import os
+
+try:
+    # Python 2
+    from urllib2 import URLError, HTTPError
+except ImportError:
+    # Python 3+
+    from urllib.error import URLError, HTTPError
 
 
 from montefevents import MontefioreGetter
@@ -40,6 +48,17 @@ def test_weirdchars():
     for base, expected in chars:
         given = parser._html2str({0: base})
         assert_equal(given[0], expected)
+
+def test_get_json():
+    url = "/seminar/sound-fields-in-rooms-models-and-applications/"
+    expected = ['Abstract', 'Contact', 'Speaker', 'Location', 'Time', 'Seminar']
+    try:
+        ds = MontefioreGetter(fail_fast=True)
+        given = sorted(ds._get_json(url))
+        assert_true(expected, given)
+    except (URLError, HTTPError):
+        raise SkipTest
+
 
 
 def test_json_parsing():

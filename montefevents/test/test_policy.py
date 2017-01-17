@@ -113,5 +113,27 @@ def test_much_later():
     assert_equal(policy(tba), Decision.IGNORE)
 
 
+def test_mondays():
+    ref_dates_wrong = [datetime(2017, 1, 16, 10, 00),  # Monday
+                       datetime(2017, 1, 17, 10, 00),  # Tuesday
+                       datetime(2017, 1, 19, 10, 00),  # Thursday
+                       datetime(2017, 1, 20, 10, 00),  # Friday
+                       datetime(2017, 1, 21, 10, 00),  # Saturday
+                       datetime(2017, 1, 22, 10, 00),  # Sunday
+                       ]
+
+    ref_date_announce = datetime(2017, 1, 18, 10, 00)  # Wendnesday
+    seminar_date = datetime(2017, 1, 23, 10, 00)  # Monday
+
+    sem = _basic_seminar(seminar_date)
+    policy = Policy(ref_date_announce)
+    assert_equal(policy(sem), Decision.ANNOUNCE)
+    policy = Policy(seminar_date)
+    assert_equal(policy(sem), Decision.REMIND)
+
+    for ref_date in ref_dates_wrong:
+        policy = Policy(ref_date)
+        assert_equal(policy(sem), Decision.IGNORE)
+
 
 

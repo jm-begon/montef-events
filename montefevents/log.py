@@ -24,7 +24,7 @@ def get_info_log(name=None):
 
 def std_log():
     basename = __name__.split(".")[0]
-    frmt = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    frmt = logging.Formatter('%(process)d - %(asctime)s - %(name)s - %(levelname)s: %(message)s')
     # Warn +
     warn_log = get_warn_log(basename)
     hdlr = logging.StreamHandler(sys.stderr)

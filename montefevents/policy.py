@@ -21,8 +21,14 @@ class Policy(object):
             return Decision.IGNORE
         n_days = event.how_many_days_before(self.ref_date)
         if 0 <= n_days < 7:
+            # If the seminar is withing the week
             if n_days == 0:
+                # If the seminar is today
                 return Decision.REMIND
-            if self.ref_date.weekday() == 0:
+            elif self.ref_date.weekday() == 0:  # Monday
+                # If it is monday
+                return Decision.ANNOUNCE
+            elif self.ref_date.weekday() == 2 and n_days == 5:
+                # If it is wendnesday and the seminar is the following monday
                 return Decision.ANNOUNCE
         return Decision.IGNORE
