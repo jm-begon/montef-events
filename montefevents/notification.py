@@ -162,7 +162,8 @@ class Sender(object):
             try:
                 with self.channel as connection:
                     connection.send(event, decision)
-                    info_log.info("Event {} sent".format(event.name))
+                    info_log.info("[{}] Event '{}' sent".format(decision,
+                                                                event.name))
 
             except Exception as ex:
                 if self.fail_fast:
