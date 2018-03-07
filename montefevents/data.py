@@ -29,10 +29,8 @@ from .event import Seminar
 from .log import get_warn_log
 
 
-
 __BASE_URL__ = "http://www.montefiore.ulg.ac.be"
 __SEMINAR_SUFFIX__ = "/seminars"
-
 
 
 class JSONParser(object):
@@ -49,8 +47,7 @@ class JSONParser(object):
 
     def _html2str(self, dictionary):
         parser = HTMLParser()
-        return {k:parser.unescape(v) for k,v in dictionary.items()}
-
+        return {k: parser.unescape(v) for k,v in dictionary.items()}
 
     def __call__(self, jdict):
         if 'Seminar' not in jdict:
@@ -67,8 +64,6 @@ class JSONParser(object):
                        contact=contact, abstract=abstract)
 
 
-
-
 class DataSource(object):
     __metaclass__ = ABCMeta
 
@@ -76,12 +71,8 @@ class DataSource(object):
     def get_next_seminars(self):
         pass
 
-
     def __iter__(self):
         return iter(self.get_next_seminars())
-
-
-
 
 
 class MontefioreGetter(DataSource):
@@ -93,7 +84,6 @@ class MontefioreGetter(DataSource):
         self.parser = parser
         self.fail_fast = fail_fast
         self.reader = codecs.getreader("utf-8")
-
 
     def _get_link_list(self, page):
         soup = BeautifulSoup(page, 'html.parser')
@@ -127,7 +117,6 @@ class MontefioreGetter(DataSource):
                 "Got Exception {error})".format(jdict=str(jdict),
                                                 error=repr(e)))
             return None
-
 
     def get_next_seminars(self):
         url = self.base_url+self.seminar_suffix
