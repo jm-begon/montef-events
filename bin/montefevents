@@ -2,13 +2,16 @@
 
 from __future__ import unicode_literals
 
-__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
-
 from email.utils import parseaddr
 from datetime import datetime
 
-from montefevents import SMTPChannel, SMTPRenderer, Sender, Policy
+from montefevents import SMTPChannel, SMTPRenderer, Sender, Policy, \
+    AnnouncePolicy
 from montefevents import MontefioreGetter, std_log
+
+
+__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
+
 
 def parse_mail(email):
     name, addr = parseaddr(email)
@@ -16,23 +19,28 @@ def parse_mail(email):
         raise ValueError("The email address is not valid.")
     return addr
 
+
 def parse_date(strdate):
     """
     Parse a date given as a string in format
-        (d)d.(m)m.yy (ex. 2.08.15)
+        (d)d.(m)m.(yy)yy (ex. 2.08.15 or 02.8.2015)
         or
-        (d)d.(m)m.yyyy (ex. 02.8.2015)
+        (d)d/(m)m/(yy)yy (ex. 2/08/15 or 02/08/2015)
     """
-    try:
-        return datetime.strptime(strdate, "%d.%m.%Y")
-    except ValueError:
-        return datetime.strptime(strdate, "%d.%m.%y")
+    for time_format in "%d.%m.%Y", "%d.%m.%y", "%d/%m/%Y", "%d/%m/%y":
+        try:
+            return datetime.strptime(strdate, time_format)
+        except ValueError:
+            pass
+    raise ValueError("Time format must be either (d)d.(m)m.(yy)yy "
+                     "(ex. 2.08.15 or 02.8.2015) or (d)d/(m)m/(yy)yy "
+                     "(ex. 2/08/15 or 02/08/2015)")
+
 
 def parse_smtp(smpt, from_addr):
     if smpt is None:
         smpt = "smtp." + from_addr.split("@")[-1]
     return smpt
-
 
 
 if __name__ == '__main__':
@@ -50,7 +58,8 @@ if __name__ == '__main__':
                              "instead of sending them.")
     parser.add_argument("--date", "-a", type=str, default=None,
                         help="Send announcement emails as if we were that date."
-                             " Date must be of the form (d)d.(m)m.(yy)yy.")
+                             " Date must be of the form (d)d.(m)m.(yy)yy or "
+                             "(d)d/(m)m/(yy)yy.")
     parser.add_argument("--from_addr", "-f", type=str,
                         default="events@montefiore.ulg.ac.be",
                         help="The source email address.")
@@ -68,27 +77,28 @@ if __name__ == '__main__':
                         "SMTP server")
     parser.add_argument("--fail_fast", action="store_true", default=False,
                         help="Whether to stop at the first error or not")
+    parser.add_argument("--announce", action="store_true", default=False,
+                        help="Whether to announce all seminar for the current "
+                             "date.")
     # ----------------------------- Parsing ----------------------------- #
     args = parser.parse_args()
 
     to_addrs = [parse_mail(x) for x in args.to_addrs]
-    debug = args.debug
-    ref_date = parse_date(args.date) if args.date is not None else datetime.today()
+    ref_date = parse_date(args.date) if args.date is not None \
+        else datetime.today()
     from_addr = parse_mail(args.from_addr)
     smtp = parse_smtp(args.smtp, from_addr)
-    port = args.port
-    username = args.username
-    password = args.password
     fail_fast = args.fail_fast
 
+    policy = AnnouncePolicy(ref_date) if args.announce else Policy(ref_date)
     # ----------------------------- Logging ----------------------------- #
     std_log()
 
     # ----------------------------- Processing ----------------------------- #
 
     channel = SMTPChannel(SMTPRenderer(), smtp, to_addrs, from_addr,
-                          username, password, port)
-    sender = Sender(Policy(ref_date), channel, fail_fast=fail_fast, debug=debug)
+                          args.username, args.password, args.port)
+    sender = Sender(policy, channel, fail_fast=fail_fast, debug=args.debug)
     datasource = MontefioreGetter(fail_fast=fail_fast)
 
     sender(datasource)

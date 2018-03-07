@@ -28,6 +28,24 @@ class Policy(object):
                 # If it is monday
                 return Decision.ANNOUNCE
             elif self.ref_date.weekday() == 2 and n_days == 5:
-                # If it is wendnesday and the seminar is the following monday
+                # If it is wednesday and the seminar is the following monday
                 return Decision.ANNOUNCE
+        return Decision.IGNORE
+
+
+class AnnouncePolicy(object):
+    """
+    Announce all the seminar of a given day.
+    """
+    def __init__(self, ref_date=datetime.today()):
+        self.ref_date = ref_date
+
+    def __call__(self, event):
+        if not event.is_filled():
+            return Decision.IGNORE
+
+        n_days = event.how_many_days_before(self.ref_date)
+        if n_days == 0:
+            return Decision.ANNOUNCE
+
         return Decision.IGNORE

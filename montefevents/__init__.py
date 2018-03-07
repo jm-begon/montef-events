@@ -50,16 +50,16 @@ to stdout.
 import logging
 
 from .event import Event, Seminar
-from .policy import Decision, Policy
+from .policy import Decision, Policy, AnnouncePolicy
 from .notification import Sender, SMTPChannel
 from .data import MontefioreGetter
 from .renderer import SMTPRenderer
 from .log import get_warn_log, get_info_log, std_log
 
 
-__all__ = ["Event", "Seminar", "Decision", "Policy", "Sender", "SMTPChannel",
-           "MontefioreGetter", "SMTPRenderer", "get_warn_log", "get_info_log",
-           "std_log"]
+__all__ = ["Event", "Seminar", "Decision", "Policy", "AnnouncePolicy", "Sender",
+           "SMTPChannel", "MontefioreGetter", "SMTPRenderer", "get_warn_log",
+           "get_info_log", "std_log"]
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
 
