@@ -2,9 +2,6 @@
 
 from __future__ import unicode_literals, print_function
 
-__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
-
-
 from abc import ABCMeta, abstractmethod
 import smtplib
 
@@ -32,10 +29,8 @@ class Connection(object):
     def close(self):
         pass
 
-
     def __del__(self):
         self.close()
-
 
 
 class SMTPConnection(Connection):
@@ -58,7 +53,6 @@ class SMTPConnection(Connection):
         if self.conn is not None:
             self.conn.quit()
         self.conn = None
-
 
     def send(self, event, decision):
         # Build email message
@@ -83,8 +77,6 @@ class SMTPAuthConnection(SMTPConnection):
         self.conn = smtplib.SMTP(self.host, self.port)
         self.conn.starttls()
         self.conn.login(self.username, self.password)
-
-
 
 
 class Channel(object):
@@ -144,9 +136,6 @@ class SMTPChannel(Channel):
             print("> AUTH:", self.username)
         print("> CONTENT")
         self.renderer.preview(event, decision)
-
-
-
 
 
 class Sender(object):

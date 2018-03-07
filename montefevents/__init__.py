@@ -47,11 +47,7 @@ This module also exposed `std_log` which redirect errrors to stderr and info
 to stdout.
 """
 
-
-__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
-__version__ = '0.1.dev2'
-
-
+import logging
 
 from .event import Event, Seminar
 from .policy import Decision, Policy
@@ -65,7 +61,10 @@ __all__ = ["Event", "Seminar", "Decision", "Policy", "Sender", "SMTPChannel",
            "MontefioreGetter", "SMTPRenderer", "get_warn_log", "get_info_log",
            "std_log"]
 
-import logging
 logging.getLogger(__name__).addHandler(logging.NullHandler())
+
+
+__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
+__version__ = '0.1.dev3'
 
 

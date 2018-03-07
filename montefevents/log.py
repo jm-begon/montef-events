@@ -2,9 +2,6 @@
 
 from __future__ import unicode_literals
 
-
-__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
-
 import sys
 import logging
 
@@ -14,6 +11,7 @@ def get_warn_log(name=None):
         name = __name__
     splits = name.split(".")
     return logging.getLogger(".".join([splits[0], "error"] + splits[1:]))
+
 
 def get_info_log(name=None):
     if name is None:

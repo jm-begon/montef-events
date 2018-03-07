@@ -2,10 +2,6 @@
 
 from __future__ import unicode_literals
 
-__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
-
-
-
 from datetime import datetime
 try:
     # Python 2

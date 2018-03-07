@@ -2,8 +2,6 @@
 
 from __future__ import unicode_literals
 
-__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
-
 from datetime import datetime
 
 
@@ -11,6 +9,7 @@ class Decision(object):
     IGNORE = "IGNORE"
     ANNOUNCE = "ANNOUNCE"
     REMIND = "REMIND"
+
 
 class Policy(object):
     def __init__(self, ref_date=datetime.today()):

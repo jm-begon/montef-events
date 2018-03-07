@@ -81,10 +81,8 @@ if __name__ == '__main__':
     password = args.password
     fail_fast = args.fail_fast
 
-
     # ----------------------------- Logging ----------------------------- #
     std_log()
-
 
     # ----------------------------- Processing ----------------------------- #
 
@@ -94,7 +92,6 @@ if __name__ == '__main__':
     datasource = MontefioreGetter(fail_fast=fail_fast)
 
     sender(datasource)
-
 
 
 

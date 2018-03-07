@@ -2,11 +2,7 @@
 
 from __future__ import unicode_literals
 
-__author__ = "Begon Jean-Michel <jm.begon@gmail.com>"
-
-
 from abc import ABCMeta
-
 
 
 class Event(object):
@@ -30,7 +26,6 @@ class Event(object):
 
     def is_filled(self):
         return self.name.strip().lower() != "tba"
-
 
 
 # TODO mailto / site of contact
@@ -65,19 +60,20 @@ class Seminar(Event):
         return "{cls}('{name}', '{speaker}', {date}, " \
                "'{location}', '{contact}', " \
                "'{abstract}')".format(cls=self.__class__.__name__,
-                                    name=self.name,
-                                    speaker=self.speaker, date=repr(self.date),
-                                    location=self.location,
-                                    contact=self.contact,
-                                    abstract=self.abstract)
+                                      name=self.name,
+                                      speaker=self.speaker, date=repr(self.date),
+                                      location=self.location,
+                                      contact=self.contact,
+                                      abstract=self.abstract)
+
     def __str__(self):
         return "{cls}({name}, {speaker}, {date}, " \
                "{location}, {contact}".format(cls=self.__class__.__name__,
-                                                name=self.name,
-                                                speaker=self.speaker,
-                                                date=str(self.date),
-                                                location=self.location,
-                                                contact=self.contact)
+                                              name=self.name,
+                                              speaker=self.speaker,
+                                              date=str(self.date),
+                                              location=self.location,
+                                              contact=self.contact)
 
 
 
