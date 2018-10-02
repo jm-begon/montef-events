@@ -50,7 +50,7 @@ to stdout.
 import logging
 
 from .event import Event, Seminar
-from .policy import Decision, Policy, AnnouncePolicy
+from .policy import Decision, Policy, AnnouncePolicy, RemindOnlyPolicy
 from .notification import Sender, SMTPChannel
 from .data import MontefioreGetter
 from .renderer import SMTPRenderer

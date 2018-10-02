@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from email.utils import parseaddr
 from datetime import datetime
 
-from montefevents import SMTPChannel, SMTPRenderer, Sender, Policy, \
+from montefevents import SMTPChannel, SMTPRenderer, Sender, RemindOnlyPolicy, \
     AnnouncePolicy
 from montefevents import MontefioreGetter, std_log
 
@@ -90,7 +90,8 @@ if __name__ == '__main__':
     smtp = parse_smtp(args.smtp, from_addr)
     fail_fast = args.fail_fast
 
-    policy = AnnouncePolicy(ref_date) if args.announce else Policy(ref_date)
+    policy = AnnouncePolicy(ref_date) if args.announce \
+        else RemindOnlyPolicy(ref_date)
     # ----------------------------- Logging ----------------------------- #
     std_log()
 

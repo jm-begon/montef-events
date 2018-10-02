@@ -18,6 +18,9 @@ class Policy(object):
     def __call__(self, event):
         if not event.is_filled():
             return Decision.IGNORE
+        return self.make_decision(event)
+
+    def make_decision(self, event):
         n_days = event.how_many_days_before(self.ref_date)
         if 0 <= n_days < 7:
             # If the seminar is withing the week
@@ -33,19 +36,26 @@ class Policy(object):
         return Decision.IGNORE
 
 
-class AnnouncePolicy(object):
+class AnnouncePolicy(Policy):
     """
     Announce all the seminar of a given day.
     """
-    def __init__(self, ref_date=datetime.today()):
-        self.ref_date = ref_date
-
-    def __call__(self, event):
-        if not event.is_filled():
-            return Decision.IGNORE
-
+    def make_decision(self, event):
         n_days = event.how_many_days_before(self.ref_date)
         if n_days == 0:
             return Decision.ANNOUNCE
 
         return Decision.IGNORE
+
+
+class RemindOnlyPolicy(Policy):
+    """
+    Send only reminders
+    """
+    def make_decision(self, event):
+        n_days = event.how_many_days_before(self.ref_date)
+        if n_days == 0:
+            return Decision.REMIND
+        return Decision.IGNORE
+
+
